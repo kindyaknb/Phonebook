@@ -270,12 +270,13 @@ footer {
 .review-item {
     display: flex;
     justify-content: space-between; /* Текст ліворуч, кнопка праворуч */
-    align-items: center;
+    align-items: flex-start; /* Вирівнює елементи по верхньому краю (ліворуч) */
     margin-bottom: 10px; /* Відступ між елементами */
     padding: 10px;
     background-color: #f8f9fa; /* Світлий фон */
     border-radius: 5px;
 }
+
 
 .review-text {
     margin-right: 15px; /* Відступ від кнопки */
