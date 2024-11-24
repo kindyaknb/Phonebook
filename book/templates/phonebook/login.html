@@ -1,0 +1,10 @@
+{% extends "phonebook/base.html" %}
+{% block content %}
+    <h2>Увійти</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Увійти</button>
+    </form>
+    <p>Не маєте акаунта? <a href="{% url 'register' %}">Реєстрація</a>.</p>
+{% endblock %}

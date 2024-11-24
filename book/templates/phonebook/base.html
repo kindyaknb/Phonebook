@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Телефонний довідник</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'phonebook/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #B3DCFD;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #007BFF;
+        }
+        .logo img {
+            width: 60px;
+            margin-right: 10px;
+        }
+        .logo h1 {
+            font-size: 30px;
+            color: white;
+            margin-bottom: 5px;
+        }
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 25px;
+            padding: 5px;
+        }
+        .search-bar input {
+            border: none;
+            padding: 8px;
+            width: 80%;
+            border-radius: 20px;
+        }
+        .search-bar button {
+            background-color: #007BFF;
+            border: none;
+            padding: 8px 12px;
+            margin-left: 5px;
+            border-radius: 50%;
+        }
+        .search-bar button i {
+            color: white;
+        }
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #007BFF;
+            padding: 10px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+        }
+        .navbar a:hover {
+            background-color: #0056b3;
+        }
+        .add-contact-btn {
+            margin-top:15px;
+            margin-left: 700px;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            display: inline-block;
+        }
+        .add-contact-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="{% url 'base' %}">Головна</a>
+        <a href="{% url 'contact_list' %}">Контакти</a>
+        <a href="{% url 'reviews' %}">Відгуки</a>
+    </div>
+
+    <div class="header">
+        <div class="logo">
+            <h1><img src="{% static 'phonebook/logo.png' %}" alt="Логотип"> Phonebook</h1>
+        </div>
+        <div class="search-bar">
+            <input id="search-input" type="text" placeholder="Введіть ім'я або номер для пошуку">
+            <button id="search-button"><i class="fa fa-search"></i></button>
+        </div>
+    </div>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+        {% if request.path == '/contacts/' %} <!-- Перевірка шляху -->
+            <a href="{% url 'add_contact' %}" class="add-contact-btn">Add contact</a>
+        {% endif %}
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <ul id="contact-list">
+            {% for contact in contacts %}
+            <li data-phone="{{ contact.phone_number }}" data-name="{{ contact.name }}">
+                <strong>{{ contact.name }}</strong> - {{ contact.phone_number }}
+                {% if contact.email %} ({{ contact.email }}) {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Телефонний довідник. Всі права захищені.</p>
+    </footer>
+
+    <script>
+        const searchInput = document.getElementById('search-input');
+        const searchButton = document.getElementById('search-button');
+        const contacts = document.querySelectorAll('#contact-list li');
+
+        searchButton.addEventListener('click', function () {
+            const query = searchInput.value.trim().toLowerCase();
+            let found = false;
+
+            contacts.forEach(contact => {
+                const phone = contact.getAttribute('data-phone').toLowerCase();
+                const name = contact.getAttribute('data-name').toLowerCase();
+
+                if (phone.includes(query) || name.includes(query)) {
+                    contact.style.display = 'list-item';
+                    contact.style.backgroundColor = '#DFF2BF';
+                    found = true;
+                } else {
+                    contact.style.display = 'none';
+                }
+            });
+
+            if (!found && query !== '') {
+                alert('Контакт не знайдено!');
+            }
+
+            if (query === '') {
+                contacts.forEach(contact => {
+                    contact.style.display = 'list-item';
+                    contact.style.backgroundColor = '';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

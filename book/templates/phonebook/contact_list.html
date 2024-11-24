@@ -1,0 +1,31 @@
+{% extends 'phonebook/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'phonebook/style.css' %}">
+    <title>Phonebook</title>
+</head>
+<body>
+    <header>
+        {% if user.is_authenticated %}
+            <p>Привіт, {{ user.username }}! <a href="{% url 'logout' %}">Вийти</a></p>
+        {% else %}
+            <a href="{% url 'login' %}">Увійти</a> | <a href="{% url 'register' %}">Реєстрація</a>
+        {% endif %}
+    </header>
+    <h1>Phonebook</h1>
+
+    <a href="{% url 'add_contact' %}">Add Contact</a>
+    <ul>
+        {% for contact in contacts %}
+            <li>
+                <strong>{{ contact.name }}</strong> - {{ contact.phone_number }}
+                {% if contact.email %} ({{ contact.email }}) {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

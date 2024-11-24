@@ -1,0 +1,16 @@
+{% extends 'phonebook/base.html' %}
+
+{% block content %}
+<div class="delete-review-page">
+    <h1>Підтвердити видалення</h1>
+    <p>Ви впевнені, що хочете видалити цей відгук?</p>
+    <blockquote>
+        {{ review.text }}
+    </blockquote>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Видалити</button>
+        <a href="{% url 'reviews' %}" class="btn btn-secondary">Скасувати</a>
+    </form>
+</div>
+{% endblock %}

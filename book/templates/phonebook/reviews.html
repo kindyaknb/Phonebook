@@ -1,0 +1,60 @@
+{% extends 'phonebook/base.html' %}
+
+{% block content %}
+    <div class="reviews-page">
+        <h1>Відгуки</h1>
+        <ul>
+            {% for review in reviews %}
+                <li class="review-item">
+                    <span class="review-text">{{ review.text }}</span>
+                    <a href="{% url 'delete_review' review.pk %}" class="btn btn-danger">Видалити</a>
+                </li>
+            {% empty %}
+                <p>Поки що немає відгуків.</p>
+            {% endfor %}
+        </ul>
+
+
+    </div>
+    <!-- FAQ -->
+    <div class="faq">
+        <h2>Часті питання</h2>
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Що можуть користувачі дізнатися про номер, з якого їм телефонують?</span>
+                <button class="toggle-button">↓</button>
+            </div>
+            <div class="faq-answer">
+                <p>Користувачі можуть переглядати інформацію про дзвінки, залишати відгуки та оцінювати номери.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Що значить параметр «кількість переглядів» у номера телефону?</span>
+                <button class="toggle-button">↓</button>
+            </div>
+            <div class="faq-answer">
+                <p>Це кількість разів, коли користувачі переглядали інформацію про номер телефону.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Чи форум модеруються?</span>
+                <button class="toggle-button">↓</button>
+            </div>
+            <div class="faq-answer">
+                <p>Обговорення номерів частково модеруються, підозрілі коментарі розглядаються окремо.</p>
+            </div>
+        </div>
+    </div>
+
+        <!-- Форма для відгуків -->
+    <div class="feedback-form">
+        <h2>Залиште свій відгук</h2>
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{ form.as_p }}  <!-- Django автоматично генерує HTML для форми -->
+            <button type="submit">Надіслати</button>
+        </form>
+    </div>
+{% endblock %}
