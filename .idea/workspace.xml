@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e15c2195-9ae8-48ae-b907-fa2da7f27abf" name="Changes" comment="" />
+    <list default="true" id="e15c2195-9ae8-48ae-b907-fa2da7f27abf" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phonebook/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Phonebook/settings.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,6 +39,7 @@
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.pycharm.django.structure.promotion.once.per.project": "true",
     "git-widget-placeholder": "main",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
@@ -92,7 +96,7 @@
       <workItem from="1732212755447" duration="4929000" />
       <workItem from="1732285777844" duration="5719000" />
       <workItem from="1732359791086" duration="18114000" />
-      <workItem from="1732465887009" duration="2930000" />
+      <workItem from="1732465887009" duration="3905000" />
     </task>
     <servers />
   </component>
