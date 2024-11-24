@@ -16,7 +16,6 @@
 
 
     </div>
-    <!-- FAQ -->
     <div class="faq">
         <h2>Часті питання</h2>
         <div class="faq-item">
@@ -48,12 +47,12 @@
         </div>
     </div>
 
-        <!-- Форма для відгуків -->
+
     <div class="feedback-form">
         <h2>Залиште свій відгук</h2>
         <form method="POST" action="">
             {% csrf_token %}
-            {{ form.as_p }}  <!-- Django автоматично генерує HTML для форми -->
+            {{ form.as_p }}
             <button type="submit">Надіслати</button>
         </form>
     </div>
